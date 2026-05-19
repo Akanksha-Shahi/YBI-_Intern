@@ -34,7 +34,8 @@ export default function PredictionForm({ onPrediction, setLoading, setError, loa
 
     try {
       // POST to your FastAPI backend
-      const response = await axios.post("http://localhost:8000/predict", formData);
+      const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+      const response = await axios.post(`${BASE_URL}/predict`, formData);
       onPrediction(response.data, formData);
     } catch (err) {
       const message =
